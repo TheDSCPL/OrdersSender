@@ -23,6 +23,8 @@ public class MainPanel extends javax.swing.JPanel {
         topTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>( blockTypes ));
         bottomTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>( blockTypes ));
         unloadTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>( blockTypes ));
+        customTransformationFromComboBox.setModel(new javax.swing.DefaultComboBoxModel<>( blockTypes ));
+        customTransformationToComboBox.setModel(new javax.swing.DefaultComboBoxModel<>( blockTypes ));
         unloadDestinations = new String[] {"PM1", "PM2"};
         unloadDestinationComboBox.setModel(new javax.swing.DefaultComboBoxModel<>( unloadDestinations ));
         
@@ -37,9 +39,21 @@ public class MainPanel extends javax.swing.JPanel {
         p6p7Spinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 99, 1));
         assemblyQuantitySpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 99, 1));
         unloadQuantitySpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 99, 1));
+        customTransformationQuantitySpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 99, 1));
+        
+        customTransformationOrderButton.setText(com.lpcsd.CompanionLibrary.Strings.HTMLLib.wrapText(
+                "Send custom transformation order",
+                (int)(140 * 0.8),
+                java.awt.Font.PLAIN,
+                com.lpcsd.CompanionLibrary.Strings.HTMLLib.Alignment.CENTER,
+                "Tahoma",
+                11,
+                customTransformationOrderButton));
         
         nextOrderIDTextField.setText("" + OrdersSender.getOrderID());
     }
+    
+    
     
     private final String[] blockTypes;
     private final String[] unloadDestinations;
@@ -54,6 +68,7 @@ public class MainPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         p2p1Button = new javax.swing.JButton();
         p2p1Spinner = new javax.swing.JSpinner();
         p1p3Button = new javax.swing.JButton();
@@ -72,6 +87,14 @@ public class MainPanel extends javax.swing.JPanel {
         p4p6Spinner = new javax.swing.JSpinner();
         p6p7Button = new javax.swing.JButton();
         p6p7Spinner = new javax.swing.JSpinner();
+        jPanel5 = new javax.swing.JPanel();
+        customTransformationFromLabel = new javax.swing.JLabel();
+        customTransformationToLabel = new javax.swing.JLabel();
+        customTransformationQuantityLabel = new javax.swing.JLabel();
+        customTransformationFromComboBox = new javax.swing.JComboBox<>();
+        customTransformationToComboBox = new javax.swing.JComboBox<>();
+        customTransformationQuantitySpinner = new javax.swing.JSpinner();
+        customTransformationOrderButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         sendAssemblyOrderButton = new javax.swing.JButton();
         topTypeComboBox = new javax.swing.JComboBox<>();
@@ -93,6 +116,8 @@ public class MainPanel extends javax.swing.JPanel {
         sendUnloadOrderButton = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true), "Transformation Orders", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Preset orders"));
 
         p2p1Button.setText("P2 -> P1");
         p2p1Button.addActionListener(new java.awt.event.ActionListener() {
@@ -157,91 +182,170 @@ public class MainPanel extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(p4p5Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(p4p5Spinner))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(p1p2Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(p1p2Spinner))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(p3p4Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(p3p4Spinner))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(p5p7Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(p5p7Spinner))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(p2p3Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(p2p3Spinner))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(p4p6Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(p4p6Spinner))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(p6p7Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(p6p7Spinner))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(p2p1Button)
+                            .addComponent(p1p3Button))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(p1p3Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(p2p1Spinner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(p2p1Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(p2p1Button))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(p1p3Button)
+                    .addComponent(p1p3Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(p4p5Button)
+                    .addComponent(p4p5Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(p1p2Button)
+                    .addComponent(p1p2Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(p3p4Button)
+                    .addComponent(p3p4Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(p5p7Button)
+                    .addComponent(p5p7Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(p2p3Button)
+                    .addComponent(p2p3Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(p4p6Button)
+                    .addComponent(p4p6Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(p6p7Button)
+                    .addComponent(p6p7Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Custom orders"));
+
+        customTransformationFromLabel.setText("From:");
+
+        customTransformationToLabel.setText("To:");
+
+        customTransformationQuantityLabel.setText("Quantity:");
+
+        customTransformationFromComboBox.setMaximumRowCount(9);
+        customTransformationFromComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "P1" }));
+
+        customTransformationToComboBox.setMaximumRowCount(9);
+        customTransformationToComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "P1" }));
+
+        customTransformationOrderButton.setText("Send Assembly Order");
+        customTransformationOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customTransformationOrderButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(customTransformationOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(customTransformationFromComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(customTransformationFromLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(customTransformationToComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(customTransformationToLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(customTransformationQuantityLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(customTransformationQuantitySpinner))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(customTransformationFromLabel)
+                    .addComponent(customTransformationToLabel)
+                    .addComponent(customTransformationQuantityLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(customTransformationFromComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customTransformationToComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customTransformationQuantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(customTransformationOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(p2p1Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(p2p1Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(p1p3Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(p1p3Spinner))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(p4p5Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(p4p5Spinner))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(p1p2Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(p1p2Spinner))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(p3p4Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(p3p4Spinner))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(p5p7Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(p5p7Spinner))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(p2p3Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(p2p3Spinner))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(p4p6Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(p4p6Spinner))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(p6p7Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(p6p7Spinner)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(p2p1Button)
-                    .addComponent(p2p1Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(p1p3Button)
-                    .addComponent(p1p3Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(p4p5Button)
-                    .addComponent(p4p5Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(p1p2Button)
-                    .addComponent(p1p2Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(p3p4Button)
-                    .addComponent(p3p4Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(p5p7Button)
-                    .addComponent(p5p7Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(p2p3Button)
-                    .addComponent(p2p3Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(p4p6Button)
-                    .addComponent(p4p6Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(p6p7Button)
-                    .addComponent(p6p7Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true), "Assembly Orders", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -349,12 +453,14 @@ public class MainPanel extends javax.swing.JPanel {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true), "Unload Order", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
+        unloadTypeComboBox.setMaximumRowCount(9);
         unloadTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "P1" }));
 
         unLoadTypeLabel.setText("Type:");
 
         unloadDestinationLabel.setText("To:");
 
+        unloadDestinationComboBox.setMaximumRowCount(2);
         unloadDestinationComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PM1", "PM2" }));
 
         unloadQuantityLabel.setText("Quantity:");
@@ -374,18 +480,18 @@ public class MainPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(unloadTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(unloadDestinationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(unloadQuantitySpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(unLoadTypeLabel)
                         .addGap(18, 18, 18)
                         .addComponent(unloadDestinationLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(unloadQuantityLabel))
-                    .addComponent(sendUnloadOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(sendUnloadOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(unloadTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(unloadDestinationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(unloadQuantitySpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -414,20 +520,21 @@ public class MainPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(nextOrderIDLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nextOrderIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(setNextOrderIDButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(settingsButton)))
-                .addContainerGap())
+                        .addComponent(settingsButton)
+                        .addGap(31, 31, 31))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,19 +557,6 @@ public class MainPanel extends javax.swing.JPanel {
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
         OrdersSender.mainFrame.changePanel(new SettingsPanel());
     }//GEN-LAST:event_settingsButtonActionPerformed
-
-    private void p2p1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p2p1ButtonActionPerformed
-        int n;
-        try {
-            n=(Integer)p2p1Spinner.getValue();
-        }
-        catch (ClassCastException ex)
-        {
-            OrdersSender.showWarning("The quantity of an order must be an integer!");
-            return;
-        }
-        UDP.sendOrder(UDP.Orders.TRANSFORMATION, 2, 1, n);
-    }//GEN-LAST:event_p2p1ButtonActionPerformed
 
     private void p1p3ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p1p3ButtonActionPerformed
         int n;
@@ -602,7 +696,7 @@ public class MainPanel extends javax.swing.JPanel {
             OrdersSender.showWarning("The quantity of an order must be an integer!");
             return;
         }
-        UDP.sendOrder(UDP.Orders.ASSEMBLY, getBlockTypeID((String)bottomTypeComboBox.getSelectedItem()), getBlockTypeID((String)topTypeComboBox.getSelectedItem()), n);
+        UDP.sendOrder(UDP.Orders.ASSEMBLY, bottomTypeComboBox.getSelectedIndex() + 1, topTypeComboBox.getSelectedIndex() + 1, n);
     }//GEN-LAST:event_sendAssemblyOrderButtonActionPerformed
 
     private void bottomTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bottomTypeComboBoxActionPerformed
@@ -647,8 +741,34 @@ public class MainPanel extends javax.swing.JPanel {
             OrdersSender.showWarning("The quantity of an order must be an integer!");
             return;
         }
-        UDP.sendOrder(UDP.Orders.UNLOAD, getBlockTypeID((String)unloadTypeComboBox.getSelectedItem()), ((String)unloadDestinationComboBox.getSelectedItem()).equals(unloadDestinations[0]) ? 1 : 2, n);
+        UDP.sendOrder(UDP.Orders.UNLOAD, unloadTypeComboBox.getSelectedIndex() + 1, unloadDestinationComboBox.getSelectedIndex() + 1, n);
     }//GEN-LAST:event_sendUnloadOrderButtonActionPerformed
+
+    private void p2p1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p2p1ButtonActionPerformed
+        int n;
+        try {
+            n=(Integer)p2p1Spinner.getValue();
+        }
+        catch (ClassCastException ex)
+        {
+            OrdersSender.showWarning("The quantity of an order must be an integer!");
+            return;
+        }
+        UDP.sendOrder(UDP.Orders.TRANSFORMATION, 2, 1, n);
+    }//GEN-LAST:event_p2p1ButtonActionPerformed
+
+    private void customTransformationOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customTransformationOrderButtonActionPerformed
+        int n;
+        try {
+            n=(Integer)customTransformationQuantitySpinner.getValue();
+        }
+        catch (ClassCastException ex)
+        {
+            OrdersSender.showWarning("The quantity of an order must be an integer!");
+            return;
+        }
+        UDP.sendOrder(UDP.Orders.TRANSFORMATION, customTransformationFromComboBox.getSelectedIndex() + 1, customTransformationToComboBox.getSelectedIndex() + 1, n);
+    }//GEN-LAST:event_customTransformationOrderButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -656,9 +776,18 @@ public class MainPanel extends javax.swing.JPanel {
     private javax.swing.JLabel assmeblyQuantityLabel;
     private javax.swing.JLabel bottomLabel;
     private javax.swing.JComboBox<String> bottomTypeComboBox;
+    private javax.swing.JComboBox<String> customTransformationFromComboBox;
+    private javax.swing.JLabel customTransformationFromLabel;
+    private javax.swing.JButton customTransformationOrderButton;
+    private javax.swing.JLabel customTransformationQuantityLabel;
+    private javax.swing.JSpinner customTransformationQuantitySpinner;
+    private javax.swing.JComboBox<String> customTransformationToComboBox;
+    private javax.swing.JLabel customTransformationToLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel nextOrderIDLabel;
     public final javax.swing.JTextField nextOrderIDTextField = new javax.swing.JTextField();
     private javax.swing.JButton p1p2Button;
